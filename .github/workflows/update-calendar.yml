@@ -2,8 +2,11 @@ name: Scrape Hockey Schedule and Generate ICS
 
 on:
   schedule:
-    - cron: '0 3 * * *'  # Runs every day at 3:00 AM UTC
-  workflow_dispatch:  # Allows manual trigger
+    - cron: "0 3 * * *" # Runs every day at 3:00 AM UTC
+  push:
+    branches:
+      - main # Runs on push to main branch; adjust if using another branch
+  workflow_dispatch: # Allows manual trigger
 
 jobs:
   scrape:
@@ -15,7 +18,7 @@ jobs:
       - name: Set up Node.js
         uses: actions/setup-node@v4
         with:
-          node-version: '20'
+          node-version: "20"
 
       - name: Install Puppeteer dependencies
         run: |
